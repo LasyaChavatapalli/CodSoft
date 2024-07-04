@@ -1,22 +1,24 @@
+
 import random
-import string
+def PasswordGenerator(pwl):
+    alphabet = "abcdefghijklmnopqrstuvwxyz#@1234567890"
+    password = "" 
+    for j in range(pwl):
+        index = random.randint(0, len(alphabet)-1)
+        password = password + alphabet[index]  
+    password = replaceWithNumber(password)
+    password = replaceWithUppercaseLetter(password)   
+    return password
+def replaceWithNumber(pword):
+    for i in range(random.randint(1,2)):
+        index = random.randint(0, len(pword)//2)
+        pword = pword[0:index] + str(random.randint(0,9)) + pword[index+1:]
+    return pword
+def replaceWithUppercaseLetter(pword):
+    for i in range(random.randint(1,2)):
+        index = random.randint(0, len(pword)//2)
+        pword = pword[0:index] + pword[index].upper() + pword[index+1:]
+    return pword
 
-# Function to generate a random password
-def PasswordGenerator(length):
-    if length <= 0:
-            print("Length should be greater than zero.")
-            return
-    else:
-         characters = string.ascii_letters + string.digits + string.punctuation
-         password = ''.join(random.choices(characters, k=length))
-         print(f"Generated Password: {password}")  
-     
-
-# Main function to run the password generator
-print("===== Password Generator =====")
-try:
-    length = int(input("Enter the desired length of the password: "))
-    password = PasswordGenerator(length)
-     
-except ValueError:
-    print("Invalid input. Please enter a valid integer.")
+length = int(input("Enter the length of Password: "))
+print("Generated Password is: ",PasswordGenerator(length))
